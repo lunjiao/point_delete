@@ -1,0 +1,29 @@
+<!-- point_delete.launch.xml -->
+<launch>
+  <arg name="rviz_config" default="$(find-pkg-share point_delete)/rviz/rviz_config.rviz"/><!-- RViz配置文件路径 -->
+
+  <!-- RViz2节点 -->
+  <node pkg="rviz2" exec="rviz2" name="point_delete_visualization" args="-d $(var rviz_config)" output="screen">
+    <param name="use_sim_time" value="false"/>
+  </node>
+  
+  <node pkg="point_delete" exec="point_delete" name="point_deleter" output="screen">
+    <!-- 点云处理参数 -->
+    <param name="delete_radius" value="1.0"/>  <!-- 默认删除半径1米 -->
+    <param name="grid_size" value="0.4" /> <!-- 小正方体边长（单位：米）" -->
+    <param name="min_points_per_grid" value="3" /> <!-- 生成立方体所需最小点数 -->
+    <param name="gap_ratio" value="0.0" /> <!--间隙占总网格尺寸的比例 -->
+    
+
+    
+    <!-- 文件路径参数 -->
+    <param name="source_cloud" value="/home/zlunj22/test_1/point_delete/src/point_delete/cloud_out_1.pcd" /><!-- 输入点云文件路径 -->
+    <param name="save_filename" value="/home/zlunj22/test_1/point_delete/src/point_delete/PCD/save_pcd.pcd"/> <!-- 输出点云文件路径 -->
+    
+    <!-- 坐标系设置 -->
+    <param name="frame_id" value="base_link_1"/> <!-- 点云坐标系名称 -->
+    
+  </node>
+
+  
+</launch>
